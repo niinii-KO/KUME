@@ -515,16 +515,18 @@ infp = [i/infsum for i in infection]
 infdate = rd.choice(31, 1000, p=infp)
 TF = False
 for date in infdate:
-  lislis4 = ["1月" + str(date)+"日", int(num_maker2(lambda a: a>0, rd.choice(2, 1)[0]*30+30, 20, roundn=0)), rd.choice(2, 1)[0], ["D.aureus", "D.aeruginosa", "D. douma", "D.goblin", "D.jougo", "D.malum"][rd.choice(6, 1)[0]]]
+  lislis4 = ["1月" + str(date+1)+"日", int(num_maker2(lambda a: a>0, rd.choice(2, 1)[0]*30+30, 20, roundn=0)), ["男","女"][rd.choice(2, 1)[0]], ["D.aureus", "D.aeruginosa", "D. douma", "D.goblin", "D.jougo", "D.malum"][rd.choice(6, 1)[0]]]
   if not TF:
     arra = np.array([lislis4])
     TF = True
   else:
     arra = np.append(arra, [lislis4], axis=0)
 
+
 df4 = pd.DataFrame(arra, columns=['日付', '年齢', '性別','subtype'])
 df4.to_csv('１ヶ月の感染状況.csv',encoding = "shift-jis")
 number = [1000,200,10,20,20,9]
+
 TF = False
 for year in range(1950, 2023):
   cut = [max(number)*1.5, sum(number)/len(number),max(number)/100, min(number)/2, statistics.median(number),min(number)/10]
